@@ -1,0 +1,54 @@
+body {
+  /*reset margin*/
+  margin:0;
+
+  /*bring content to the center of the page*/
+  display:flex;
+  justify-content: center;
+  height: 100vh;
+  align-items: center;
+
+  background-color: aliceblue;
+  font-family: sans-serif;
+}
+
+.btn {
+  background-color: yellowgreen;
+  padding: 20px 40px;
+  border-radius: 5px;
+  /*horizontal shadow, vertical shadow, radius, color with opacity */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, .3);
+  text-decoration: none;
+  color: black;
+  position: relative;
+  overflow: hidden; /*to hide the hover::before 300px*/
+}
+
+.btn span{
+  position: relative; /*change the position*/
+  /*default index is 0, if 1, button is over everything else (text)*/
+  z-index: 1; 
+}
+
+.btn::before{
+  content: ""; /*first needs empty content*/
+  position: absolute; /*to have it absolute, parent needs to be relative*/
+  background-color: orangered;
+  width: 0;
+  height: 0;
+  /*hovering effect is showing from the center if left and top are at 50%*/
+  /*fix the hovering effect from the mouse point in JS*/
+  left:var(--xPos);
+  top:var(--yPos);/*changing var inside JS*/
+  transform: translate(-50%, -50%);/*to bring it exactly on the center of the viewport, Y and X*/
+  border-radius: 50%;
+
+  /*make ripple effect transition*/
+  transition: width .5s, height .5s;
+}
+
+.btn:hover::before{
+  width: 300px;
+  height: 300px;
+}
+
